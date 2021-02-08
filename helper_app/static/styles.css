@@ -1,0 +1,24 @@
+*{
+    margin: 0px;
+}
+.header{
+    text-align: right;
+}
+.header a{
+    margin: 10px;
+}
+a{
+    margin: 5px;
+}
+.main_link{
+    margin-left: 800px;
+}
+.logout{
+    margin: 10px;
+}
+th{
+    margin: 10px;
+}
+td{
+    margin: 10px;
+}

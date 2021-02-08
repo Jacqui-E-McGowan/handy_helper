@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Job</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div>
+        <h1>Welcome {{request.session.greeting}}! Create a job!</h1><a href="/logout">Logout</a>
+    </div>
+        <div>
+            <form action="/create" method="POST">
+                {% csrf_token %}
+                {% for message in messages %}
+                    <p class='text-danger small'>{{message}}</p>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" class="form-control" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" class="form-control" name="description">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" class="form-control" name="location">
+                </div>
+                <div class="form-group">
+                    <p>Category:</p>
+                    <label for="category">Pet Care</label>
+                    <input type="checkbox" name="category" value="Pet Care">
+                    <br>
+                    <label for="category">Electrical</label>
+                    <input type="checkbox"  name="category" value="Electrical">
+                    <br>
+                    <label for="category">Garden</label>
+                    <input type="checkbox" name="category" value="Garden">
+                    <br>
+                    <label for="category">Other</label>
+                    <input type="text" name="category">
+                </div>
+                <div>
+                    <a href="/dashboard" role="button" class="btn btn-secondary">Cancel</a>
+                    <button class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </body>

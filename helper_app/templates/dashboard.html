@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handy Helper Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div id="container">
+        <h1>Hello {{request.session.greeting}}!</h1>
+        <div class="main_link">
+            <a href="/logout" role="button" class="logout">Logout</a><a href="/new" role="button" class="btn btn-primary">New Job!</a>
+        </div>
+        <div class='container'>
+            <div>
+                <h2>Everyone's jobs:</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Job</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job in jobs %}
+                        {% if this_user not in job.add_job.all %}
+                        <tr>
+                            <td>{{job.title}}</td>
+                            <td>{{job.location}}</td>
+                        {% if job.created_by.id != request.session.user_id %}
+                            <td><a href="/dashboard/{{job.id}}/details">View</a>|<a href="/dashboard/{{job.id}}/add">Add</a></td>
+                        {% else %}
+                            <td><a href="/dashboard/{{job.id}}/details">View</a>|<a href="/dashboard/{{job.id}}/remove">Remove</a>|<a href="/dashboard/{{job.id}}/edit">Edit</a>|<a href="/dashboard/{{job.id}}/add">Add</a></td>
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <h2>{{request.session.greeting}}'s Jobs</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Job</th>
+                            <th scope="col">Actions</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job in jobs %}
+                        {% if this_user in job.add_job.all %}
+                        <tr>
+                            <td>{{job.title}}</td>
+                            <td><a href="/dashboard/{{job.id}}/details">View</a>|<a href="/dashboard/{{job.id}}/remove">Done</a>|<a href="/dashboard/{{job.id}}/giveup">Give Up</a></td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>

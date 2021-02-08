@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handy Helper Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div id="container">
+        <h1>Welcome! Sign in to manage your jobs!</h1>
+    {% for message in messages %}
+        <p>{{message}}</p>
+    {% endfor %}
+    <div>
+        <section class="register">
+            <h2>Registration</h2>
+            <form action="/register" method="POST">
+                {% csrf_token %}
+                <div class="col-md-4 form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name" id="first_name" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" id="last_name" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" name="confirm_password" id="confirm" class="form-control">
+                </div>
+                <button class="col-md-2 btn btn-info">Register</button>
+            </form>
+        </section>
+        <section class="login">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                {% csrf_token %}
+                <div class="col-md-4 form-group">
+                    <label for="login_email">Email</label>
+                    <input type="email" name="login_email" id="email" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="login_password">Password</label>
+                    <input type="password" name="login_password" id="password" class="form-control">
+                </div>
+                <button class="col-md-2 btn btn-info">Login</button>
+            </form>
+        </section>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Hello {{request.session.greeting}}! These are the job details!</h1>
+    <div class="header">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </div>
+    <div>
+        <h1>{{job.title}}</h1> 
+        <p>{{job.description}}</p>
+        <p>Location: {{job.location}}</p>
+        <p>Posted By: {{job.created_by.first_name}}</p>
+        <p>Posted On: {{job.created_at}}</p>
+        <p>Categories: {{job.category}}</p>
+    </div>
+    {% if current_user not in job.add_job.all %}
+    <a href="/dashboard/{{job.id}}/add">Add to my jobs</a>
+    {% else %}
+    <a href="/dashboard/{{job.id}}/giveup">Give Up</a>
+    {% endif %}
+</body>
