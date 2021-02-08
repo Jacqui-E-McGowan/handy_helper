@@ -1,6 +1,5 @@
 from django.db import models
 from datetime import datetime
-from multiselectfield import MultiSelectField
 import re, bcrypt
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
